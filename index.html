@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shawn Mohr — Operations & Technical Program Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #111110;
+    --canvas: #F5F4EF;
+    --warm-white: #FAFAF8;
+    --slate: #6B6B67;
+    --rule: #DDDBD4;
+    --accent: #C84B2F;
+    --accent-dim: #F5E8E4;
+    --col-left: 220px;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    /* Two-column grid that spans the entire page */
+    display: grid;
+    grid-template-columns: var(--col-left) 1fr;
+    grid-template-rows: auto;
+    min-height: 100vh;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ── LEFT COLUMN — runs full page height ── */
+  .left-col {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Sticky inner so nav/creds stay visible while scrolling */
+  .left-col-inner {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 28px;
+  }
+
+  .left-top {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    list-style: none;
+  }
+
+  .side-nav a {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555552;
+    display: block;
+    padding: 4px 0;
+    transition: color 0.15s;
+  }
+
+  .side-nav a:hover { color: #F5F4EF; text-decoration: none; }
+
+  .left-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .left-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #3A3A38;
+    margin-bottom: 8px;
+  }
+
+  .left-creds {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .left-cred {
+    font-size: 11px;
+    color: #555552;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-location {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3A3A38;
+  }
+
+  /* ── RIGHT COLUMN — all page content ── */
+  .right-col {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 52px 52px 56px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100vh;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .hero-name {
+    font-size: clamp(64px, 9vw, 108px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 36px;
+  }
+
+  .hero-rule {
+    width: 56px;
+    height: 3px;
+    background: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  .hero-bio {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink);
+    max-width: 520px;
+    margin-bottom: 40px;
+  }
+
+  .hero-bio strong { font-weight: 600; }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 11px 22px;
+    border-radius: 2px;
+    display: inline-block;
+    transition: all 0.15s;
+  }
+
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #b03f25; text-decoration: none; }
+  .btn-ghost { border: 1px solid var(--rule); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--slate); text-decoration: none; }
+
+  /* ── CONTENT SECTIONS ── */
+  .content-section {
+    padding: 64px 52px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .content-section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 44px;
+  }
+
+  .section-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+    flex-shrink: 0;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── PROJECTS ── */
+  .project {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .project:first-child { padding-top: 0; }
+  .project:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .project-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+
+  .project-name {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .project-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .badge-active { background: var(--accent-dim); color: var(--accent); }
+  .badge-done { background: #EAEAE6; color: #6B6B67; }
+  .badge-pub { background: #E6F0E8; color: #2D6A35; }
+
+  .project-meta {
+    font-size: 12px;
+    color: var(--slate);
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #333330;
+    max-width: 580px;
+  }
+
+  .project-link {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .project-link::after { content: ' →'; }
+
+  /* ── EXPERIENCE ── */
+  .exp {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0 28px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .exp:first-child { padding-top: 0; }
+  .exp:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .exp-period {
+    font-size: 11px;
+    color: var(--slate);
+    font-variant-numeric: tabular-nums;
+    padding-top: 3px;
+    line-height: 1.6;
+  }
+
+  .exp-role {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .exp-org {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .exp-detail {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #333330;
+  }
+
+  /* ── FOOTER ── */
+  .footer-right {
+    padding: 32px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--slate);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--slate);
+    font-weight: 500;
+  }
+
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    body { grid-template-columns: 1fr; }
+    .left-col { grid-column: 1; grid-row: auto; }
+    .left-col-inner { position: static; height: auto; flex-direction: row; align-items: center; padding: 20px 24px; }
+    .left-bottom { display: none; }
+    .side-nav { flex-direction: row; gap: 16px; }
+    .right-col { grid-column: 1; }
+    .hero { min-height: auto; padding: 40px 24px; }
+    .content-section { padding: 44px 24px; }
+    .exp { grid-template-columns: 1fr; gap: 4px; }
+    .footer-right { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LEFT COLUMN: spans full page height -->
+<div class="left-col">
+  <div class="left-col-inner">
+    <div class="left-top">
+      <div class="logo-mark" aria-hidden="true"></div>
+      <ul class="side-nav">
+        <li><a href="#digital">Digital</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#creative">Creative</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="left-bottom">
+      <div>
+        <div class="left-section-label">Credentials</div>
+        <div class="left-creds">
+          <div class="left-cred">PMP · CSM</div>
+          <div class="left-cred">Google AI Pro</div>
+          <div class="left-cred">Six Sigma YB</div>
+        </div>
+      </div>
+      <div>
+        <div class="left-section-label">Location</div>
+        <div class="hero-location">Toronto, ON</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT COLUMN: all content -->
+<div class="right-col">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Operations & Technical Program Manager</div>
+    <h1 class="hero-name">Shawn<br>Mohr</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-bio">
+      7+ years delivering complex initiatives across <strong>industrial IoT, luxury e-commerce, and e-learning</strong>. I architect systems, build delivery infrastructure, and operate at the intersection of technical depth and organizational clarity.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:shawn@example.com" class="btn btn-primary">Get in touch</a>
+      <a href="https://github.com/ShawnMohrToronto" class="btn btn-ghost" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/shawn-mohr-toronto/" class="btn btn-ghost" target="_blank">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- DIGITAL PROJECTS -->
+  <section class="content-section" id="digital">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Digital projects</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div class="project-name">LEAP</div>
+        <span class="project-badge badge-active">In development</span>
+      </div>
+      <div class="project-meta">B2B Lead Enrichment Agent Proxy — Solo founder build</div>
+      <p class="project-desc">An event-driven, middle-layer semantic parsing proxy that transforms unstructured public corporate text into deterministic, highly specialised database records for enterprise CRMs. Built on FastAPI, Docker, and Railway with gpt-4o-mini as the extraction engine. Designed as an invisible API layer requiring zero modification to existing client workflows — it enriches directly into HubSpot.</p>
+      <a href="https://github.com/ShawnMohrToronto" class="project-link" target="_blank">View on GitHub</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div class="project-name">Agentic Career Orchestrator</div>
+        <span class="project-badge badge-done">Completed</span>
+      </div>
+      <div class="project-meta">Job search automation pipeline — Personal tooling</div>
+      <p class="project-desc">A values-aligned job search automation system that filters postings by geography, compensation, experience fit, and organisational values. Built in Python with LLM-powered matching logic, reducing manual search overhead while improving signal quality.</p>
+      <a href="https://github.com/ShawnMohrToronto/agentic-career-orchestrator" class="project-link" target="_blank">View on GitHub</a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="content-section" id="experience">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Experience</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-period">2022 –<br>Present</div>
+      <div>
+        <div class="exp-role">Manager, Distribution Projects</div>
+        <div class="exp-org">Sephora Canada</div>
+        <div class="exp-detail">Led cross-functional distribution and operations projects across a national retail network. Managed vendor relationships, delivery timelines, and infrastructure improvements at scale.</div>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-period">2018 –<br>2022</div>
+      <div>
+        <div class="exp-role">Sr. Director, Operations & Customer Success</div>
+        <div class="exp-org">Symboticware</div>
+        <div class="exp-detail">Directed operations and customer success for an industrial IoT platform. Built delivery frameworks, managed enterprise client relationships, and scaled internal systems through significant product growth.</div>
+      </div>
+    </div>
+
+    <div class="exp">
+      <div class="exp-period">2015 –<br>2018</div>
+      <div>
+        <div class="exp-role">Project Manager</div>
+        <div class="exp-org">Sonic E-Learning</div>
+        <div class="exp-detail">Managed end-to-end delivery of custom e-learning projects for enterprise clients. Coordinated cross-functional teams across instructional design, development, and client stakeholders.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATIVE PROJECTS -->
+  <section class="content-section" id="creative">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Creative work</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div class="project-name">Havocball Run</div>
+        <span class="project-badge badge-pub">Published</span>
+      </div>
+      <div class="project-meta">Tabletop RPG Design — Havoc Engine adaptation</div>
+      <p class="project-desc">A Cannonball Run-themed one-shot TTRPG built on a custom dice pool system. Players race across a ten-location branching map, managing a shared GAS resource, neutralising escalating THREATS, and racing to clear OBJECTIVES before rival teams do. Runs in both cooperative and competitive modes — four rule changes convert the entire experience between them. Designed for and run at the Toronto D&amp;D Club.</p>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div class="project-name">Home Alone: Family Christmas</div>
+        <span class="project-badge badge-pub">Published</span>
+      </div>
+      <div class="project-meta">Tabletop RPG Design — Never Stop Blowing Up system</div>
+      <p class="project-desc">A family-friendly Home Alone-inspired one-shot in which players must prepare a snowbound estate for Christmas while fending off a pair of hapless burglars. Features a modular trap-building system with four trap categories, a branching encounter structure, and a full estate room guide. Designed to onboard new players through embedded rules and gentle prompts.</p>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div class="project-name">Epic Trucker in Danger City</div>
+        <span class="project-badge badge-pub">Published</span>
+      </div>
+      <div class="project-meta">Tabletop RPG Design — Never Stop Blowing Up system</div>
+      <p class="project-desc">A satirical pulp action one-shot set in the Regular Show universe. Players stop the Shadow Lotus Clan from seizing a mythic big rig truck across three acts of escalating stakes, branching social and combat resolution, and a prophecy-bound NPC whose arrival is gated behind player failure. An exercise in escalation design and comedic mythmaking.</p>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div class="project-name">Sidekick Quest</div>
+        <span class="project-badge badge-pub">Published</span>
+      </div>
+      <div class="project-meta">Tabletop RPG Design — Never Stop Blowing Up system</div>
+      <p class="project-desc">A pulp adventure one-shot in which players are the sidekicks to legendary archaeologist Montana Smith. A trap-laden temple slide, locked chambers, and animated Gorilla Guards reward creative stat application and collaborative problem-solving. Built to demonstrate how a familiar genre becomes structurally interesting through consequence-driven encounter design.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer-right" id="contact">
+    <span class="footer-copy">Shawn Mohr — Toronto, Ontario</span>
+    <ul class="footer-links">
+      <li><a href="mailto:shawn@example.com">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/shawn-mohr-toronto/" target="_blank">LinkedIn</a></li>
+      <li><a href="https://github.com/ShawnMohrToronto" target="_blank">GitHub</a></li>
+    </ul>
+  </div>
+
+</div><!-- end right-col -->
+
+</body>
+</html>
