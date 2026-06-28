@@ -28,27 +28,23 @@
     color: var(--ink);
     font-family: var(--sans);
     -webkit-font-smoothing: antialiased;
-    /* Two-column grid that spans the entire page */
     display: grid;
     grid-template-columns: var(--col-left) 1fr;
-    grid-template-rows: auto;
     min-height: 100vh;
   }
 
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-  /* ── LEFT COLUMN — runs full page height ── */
+  /* ── LEFT COLUMN ── */
   .left-col {
     grid-column: 1;
     grid-row: 1 / -1;
     background: var(--ink);
     display: flex;
     flex-direction: column;
-    position: relative;
   }
 
-  /* Sticky inner so nav/creds stay visible while scrolling */
   .left-col-inner {
     position: sticky;
     top: 0;
@@ -59,143 +55,80 @@
     padding: 40px 28px;
   }
 
-  .left-top {
-    display: flex;
-    flex-direction: column;
-    gap: 36px;
-  }
+  .left-top { display: flex; flex-direction: column; gap: 36px; }
 
   .logo-mark {
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     background: var(--accent);
     border-radius: 2px;
     flex-shrink: 0;
   }
 
-  .side-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    list-style: none;
-  }
+  .side-nav { display: flex; flex-direction: column; gap: 6px; list-style: none; }
 
   .side-nav a {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #555552;
-    display: block;
-    padding: 4px 0;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #555552; display: block; padding: 4px 0;
     transition: color 0.15s;
   }
 
   .side-nav a:hover { color: #F5F4EF; text-decoration: none; }
 
-  .left-bottom {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+  .left-bottom { display: flex; flex-direction: column; gap: 20px; }
 
   .left-section-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #3A3A38;
-    margin-bottom: 8px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #3A3A38; margin-bottom: 8px;
   }
 
-  .left-creds {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+  .left-creds { display: flex; flex-direction: column; gap: 4px; }
+  .left-cred { font-size: 11px; color: #555552; letter-spacing: 0.01em; }
+  .hero-location { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #3A3A38; }
 
-  .left-cred {
-    font-size: 11px;
-    color: #555552;
-    letter-spacing: 0.01em;
-  }
-
-  .hero-location {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #3A3A38;
-  }
-
-  /* ── RIGHT COLUMN — all page content ── */
-  .right-col {
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-  }
+  /* ── RIGHT COLUMN ── */
+  .right-col { grid-column: 2; display: flex; flex-direction: column; }
 
   /* ── HERO ── */
   .hero {
     padding: 52px 52px 56px;
     border-bottom: 1px solid var(--rule);
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     justify-content: flex-end;
     min-height: 100vh;
   }
 
   .hero-eyebrow {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 20px;
   }
 
   .hero-name {
     font-size: clamp(64px, 9vw, 108px);
-    font-weight: 900;
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-    color: var(--ink);
+    font-weight: 900; line-height: 0.9;
+    letter-spacing: -0.04em; color: var(--ink);
     margin-bottom: 36px;
   }
 
-  .hero-rule {
-    width: 56px;
-    height: 3px;
-    background: var(--accent);
-    margin-bottom: 28px;
-  }
+  .hero-rule { width: 56px; height: 3px; background: var(--accent); margin-bottom: 28px; }
 
   .hero-bio {
-    font-size: 17px;
-    font-weight: 300;
-    line-height: 1.75;
-    color: var(--ink);
-    max-width: 520px;
-    margin-bottom: 40px;
+    font-size: 17px; font-weight: 300;
+    line-height: 1.75; color: var(--ink);
+    max-width: 520px; margin-bottom: 40px;
   }
 
   .hero-bio strong { font-weight: 600; }
 
-  .hero-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
   .btn {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 11px 22px;
-    border-radius: 2px;
-    display: inline-block;
-    transition: all 0.15s;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 11px 22px; border-radius: 2px;
+    display: inline-block; transition: all 0.15s;
   }
 
   .btn-primary { background: var(--accent); color: white; }
@@ -212,37 +145,145 @@
   .content-section:last-child { border-bottom: none; }
 
   .section-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 44px;
+    display: flex; align-items: center;
+    gap: 16px; margin-bottom: 44px;
   }
 
   .section-num {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    font-variant-numeric: tabular-nums;
-    flex-shrink: 0;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--accent);
+    font-variant-numeric: tabular-nums; flex-shrink: 0;
   }
 
   .section-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--slate);
-    flex-shrink: 0;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--slate); flex-shrink: 0;
   }
 
-  .section-rule {
-    flex: 1;
-    height: 1px;
-    background: var(--rule);
+  .section-rule { flex: 1; height: 1px; background: var(--rule); }
+
+  /* ── CASE STUDY (LEAP) ── */
+  .case-study {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
   }
 
-  /* ── PROJECTS ── */
+  .case-study:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .case-study-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    gap: 16px; margin-bottom: 6px; flex-wrap: wrap;
+  }
+
+  .case-study-name {
+    font-size: 28px; font-weight: 900;
+    letter-spacing: -0.03em; color: var(--ink);
+  }
+
+  .project-badge {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 2px; white-space: nowrap;
+  }
+
+  .badge-active { background: var(--accent-dim); color: var(--accent); }
+  .badge-done { background: #EAEAE6; color: #6B6B67; }
+  .badge-pub { background: #E6F0E8; color: #2D6A35; }
+
+  .case-study-meta {
+    font-size: 12px; color: var(--slate);
+    margin-bottom: 28px; font-style: italic;
+  }
+
+  /* Case study sub-sections */
+  .cs-block { margin-bottom: 28px; }
+  .cs-block:last-child { margin-bottom: 0; }
+
+  .cs-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+
+  .cs-body {
+    font-size: 14px; line-height: 1.85;
+    color: #333330; max-width: 600px;
+  }
+
+  .cs-body p { margin-bottom: 12px; }
+  .cs-body p:last-child { margin-bottom: 0; }
+
+  /* Decision list */
+  .cs-decisions { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+
+  .cs-decision {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0 20px;
+    font-size: 14px; line-height: 1.7;
+  }
+
+  .cs-decision-label {
+    font-weight: 700; color: var(--ink);
+    font-size: 13px; padding-top: 1px;
+  }
+
+  .cs-decision-body { color: #333330; }
+
+  /* Stats row */
+  .cs-stats {
+    display: flex; flex-wrap: wrap;
+    gap: 1px; margin-top: 4px;
+    border: 1px solid var(--rule);
+    border-radius: 2px; overflow: hidden;
+  }
+
+  .cs-stat {
+    background: var(--warm-white);
+    padding: 14px 20px; flex: 1;
+    min-width: 140px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .cs-stat:last-child { border-right: none; }
+
+  .cs-stat-value {
+    font-size: 20px; font-weight: 800;
+    letter-spacing: -0.02em; color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .cs-stat-label {
+    font-size: 11px; color: var(--slate);
+    line-height: 1.4;
+  }
+
+  /* Stack tags */
+  .cs-stack {
+    display: flex; flex-wrap: wrap;
+    gap: 6px; margin-top: 4px;
+  }
+
+  .cs-stack-tag {
+    font-size: 11px; font-weight: 500;
+    padding: 4px 10px;
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 2px; color: var(--ink);
+  }
+
+  .case-study-link {
+    display: inline-block; margin-top: 24px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .case-study-link::after { content: ' →'; }
+
+  /* ── STANDARD PROJECTS ── */
   .project {
     padding: 32px 0;
     border-bottom: 1px solid var(--rule);
@@ -252,56 +293,27 @@
   .project:last-child { border-bottom: none; padding-bottom: 0; }
 
   .project-top {
-    display: flex;
-    align-items: baseline;
+    display: flex; align-items: baseline;
     justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 6px;
-    flex-wrap: wrap;
+    gap: 16px; margin-bottom: 6px; flex-wrap: wrap;
   }
 
   .project-name {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--ink);
+    font-size: 22px; font-weight: 800;
+    letter-spacing: -0.02em; color: var(--ink);
   }
 
-  .project-badge {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 9px;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-
-  .badge-active { background: var(--accent-dim); color: var(--accent); }
-  .badge-done { background: #EAEAE6; color: #6B6B67; }
-  .badge-pub { background: #E6F0E8; color: #2D6A35; }
-
-  .project-meta {
-    font-size: 12px;
-    color: var(--slate);
-    margin-bottom: 14px;
-    font-style: italic;
-  }
+  .project-meta { font-size: 12px; color: var(--slate); margin-bottom: 14px; font-style: italic; }
 
   .project-desc {
-    font-size: 14px;
-    line-height: 1.8;
-    color: #333330;
-    max-width: 580px;
+    font-size: 14px; line-height: 1.8;
+    color: #333330; max-width: 580px;
   }
 
   .project-link {
-    display: inline-block;
-    margin-top: 14px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: var(--accent);
+    display: inline-block; margin-top: 14px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.04em; color: var(--accent);
     text-transform: uppercase;
   }
 
@@ -319,62 +331,24 @@
   .exp:first-child { padding-top: 0; }
   .exp:last-child { border-bottom: none; padding-bottom: 0; }
 
-  .exp-period {
-    font-size: 11px;
-    color: var(--slate);
-    font-variant-numeric: tabular-nums;
-    padding-top: 3px;
-    line-height: 1.6;
-  }
-
-  .exp-role {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 2px;
-  }
-
-  .exp-org {
-    font-size: 13px;
-    color: var(--accent);
-    margin-bottom: 10px;
-    font-weight: 500;
-  }
-
-  .exp-detail {
-    font-size: 13px;
-    line-height: 1.75;
-    color: #333330;
-  }
+  .exp-period { font-size: 11px; color: var(--slate); font-variant-numeric: tabular-nums; padding-top: 3px; line-height: 1.6; }
+  .exp-role { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 2px; }
+  .exp-org { font-size: 13px; color: var(--accent); margin-bottom: 10px; font-weight: 500; }
+  .exp-detail { font-size: 13px; line-height: 1.75; color: #333330; }
 
   /* ── FOOTER ── */
   .footer-right {
     padding: 32px 52px;
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
+    flex-wrap: wrap; gap: 16px;
   }
 
-  .footer-copy {
-    font-size: 12px;
-    color: var(--slate);
-  }
+  .footer-copy { font-size: 12px; color: var(--slate); }
 
-  .footer-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-  }
+  .footer-links { display: flex; gap: 24px; list-style: none; }
 
-  .footer-links a {
-    font-size: 12px;
-    color: var(--slate);
-    font-weight: 500;
-  }
-
+  .footer-links a { font-size: 12px; color: var(--slate); font-weight: 500; }
   .footer-links a:hover { color: var(--ink); }
 
   /* ── RESPONSIVE ── */
@@ -388,13 +362,14 @@
     .hero { min-height: auto; padding: 40px 24px; }
     .content-section { padding: 44px 24px; }
     .exp { grid-template-columns: 1fr; gap: 4px; }
+    .cs-decision { grid-template-columns: 1fr; gap: 4px; }
     .footer-right { padding: 24px; }
   }
 </style>
 </head>
 <body>
 
-<!-- LEFT COLUMN: spans full page height -->
+<!-- LEFT COLUMN -->
 <div class="left-col">
   <div class="left-col-inner">
     <div class="left-top">
@@ -423,7 +398,7 @@
   </div>
 </div>
 
-<!-- RIGHT COLUMN: all content -->
+<!-- RIGHT COLUMN -->
 <div class="right-col">
 
   <!-- HERO -->
@@ -435,7 +410,7 @@
       7+ years delivering complex initiatives across <strong>industrial IoT, luxury e-commerce, and e-learning</strong>. I architect systems, build delivery infrastructure, and operate at the intersection of technical depth and organizational clarity.
     </p>
     <div class="hero-actions">
-      <a href="mailto:shawn@example.com" class="btn btn-primary">Get in touch</a>
+      <a href="mailto:shawnmohr7@gmail.com" class="btn btn-primary">Get in touch</a>
       <a href="https://github.com/ShawnMohrToronto" class="btn btn-ghost" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/shawn-mohr-toronto/" class="btn btn-ghost" target="_blank">LinkedIn</a>
     </div>
@@ -449,24 +424,119 @@
       <div class="section-rule"></div>
     </div>
 
-    <div class="project">
-      <div class="project-top">
-        <div class="project-name">LEAP</div>
+    <!-- LEAP CASE STUDY -->
+    <div class="case-study">
+      <div class="case-study-header">
+        <div class="case-study-name">LEAP</div>
         <span class="project-badge badge-active">In development</span>
       </div>
-      <div class="project-meta">B2B Lead Enrichment Agent Proxy — Solo founder build</div>
-      <p class="project-desc">An event-driven, middle-layer semantic parsing proxy that transforms unstructured public corporate text into deterministic, highly specialised database records for enterprise CRMs. Built on FastAPI, Docker, and Railway with gpt-4o-mini as the extraction engine. Designed as an invisible API layer requiring zero modification to existing client workflows — it enriches directly into HubSpot.</p>
-      <a href="https://github.com/ShawnMohrToronto" class="project-link" target="_blank">View on GitHub</a>
+      <div class="case-study-meta">B2B Lead Enrichment Agent Proxy — Solo founder build · Program management & technical execution</div>
+
+      <div class="cs-block">
+        <div class="cs-label">The problem</div>
+        <div class="cs-body">
+          <p>Revenue Operations teams at mid-market B2B firms share a structural problem: their CRMs are full of stale, incomplete company records. Lead data decays at roughly 30% per year. The standard response is manual research — SDRs spending hours filling in fields that should already be there — or expensive horizontal enrichment platforms that return generic, pre-scraped data that doesn't match the specific intelligence each firm actually needs.</p>
+          <p>ZoomInfo and Apollo offer broad coverage from static databases. Clay aggregates multiple vendors with LLM summaries, but uses generalised prompts to keep costs predictable — meaning every client gets the same surface-level output. Neither answers the question a RevOps director actually needs answered: <em>does this company match our specific ICP, based on what they actually do?</em></p>
+        </div>
+      </div>
+
+      <div class="cs-block">
+        <div class="cs-label">The approach</div>
+        <div class="cs-decisions">
+          <div class="cs-decision">
+            <div class="cs-decision-label">Invisible by design</div>
+            <div class="cs-decision-body">No new dashboard, no credits to manage, no behavior change required. LEAP executes inside the client's existing HubSpot workflow. The zero-click proof-of-value motion sends a prospect 30 of their own un-enriched leads, returned as a completed import sheet within two hours.</div>
+          </div>
+          <div class="cs-decision">
+            <div class="cs-decision-label">Vertical precision</div>
+            <div class="cs-decision-body">Rather than matching a generic industry tag, LEAP parses unstructured text from company case studies and homepage copy to determine specific operational characteristics. The extraction schema is customised per client vertical — the capability Clay's cost model prevents them from offering.</div>
+          </div>
+          <div class="cs-decision">
+            <div class="cs-decision-label">Solo-operator economics</div>
+            <div class="cs-decision-body">The financial model was built before the first line of code. At $0.003 variable COGS per lead and a $199/month base subscription, the unit economics support a one-person operation from day one.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-block">
+        <div class="cs-label">The numbers</div>
+        <div class="cs-stats">
+          <div class="cs-stat">
+            <div class="cs-stat-value">$0.003</div>
+            <div class="cs-stat-label">Variable COGS per lead</div>
+          </div>
+          <div class="cs-stat">
+            <div class="cs-stat-value">$321</div>
+            <div class="cs-stat-label">Contribution margin per account/month</div>
+          </div>
+          <div class="cs-stat">
+            <div class="cs-stat-value">43:1</div>
+            <div class="cs-stat-label">LTV:CAC ratio</div>
+          </div>
+          <div class="cs-stat">
+            <div class="cs-stat-value">6</div>
+            <div class="cs-stat-label">Accounts to break-even</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-block">
+        <div class="cs-label">Program management</div>
+        <div class="cs-body">
+          <p>LEAP was scoped as a formal program initiative before a line of code was written. A full project proposal established the competitive architecture, financial model, TAM/ICP definition, legal compliance framework, and quantitative validation methodology. A project charter followed, defining a 50-day critical path across four phases with an agent-augmented RACI matrix that delegates execution tasks to specialised LLM configurations while the founder retains strategic accountability.</p>
+          <p>Risk was identified and mitigated formally: scraper blocking routed through proxy nodes; GDPR/CASL exposure contained by restricting initial operations to North American domains; token budget bleed controlled by a programmatic pre-filter that bypasses LLM calls on low-signal pages.</p>
+        </div>
+      </div>
+
+      <div class="cs-block">
+        <div class="cs-label">Current status</div>
+        <div class="cs-body">
+          <p>Phase 1 in active development. Live FastAPI application with working <code style="font-size:13px;background:#EAEAE6;padding:1px 5px;border-radius:2px;">/healthz</code> and <code style="font-size:13px;background:#EAEAE6;padding:1px 5px;border-radius:2px;">/enrich</code> endpoints. Async webhook ingestion confirmed under 200ms. Project scaffold, dependency stack, and environment management committed to GitHub. Target: 30-lead zero-click proof-of-value delivery at day 47.</p>
+        </div>
+      </div>
+
+      <div class="cs-block">
+        <div class="cs-label">Stack</div>
+        <div class="cs-stack">
+          <span class="cs-stack-tag">Python</span>
+          <span class="cs-stack-tag">FastAPI</span>
+          <span class="cs-stack-tag">Docker</span>
+          <span class="cs-stack-tag">Railway</span>
+          <span class="cs-stack-tag">Supabase</span>
+          <span class="cs-stack-tag">Jina AI</span>
+          <span class="cs-stack-tag">Firecrawl</span>
+          <span class="cs-stack-tag">gpt-4o-mini</span>
+        </div>
+      </div>
+
+      <a href="https://github.com/ShawnMohrToronto" class="case-study-link" target="_blank">View on GitHub</a>
     </div>
 
-    <div class="project">
-      <div class="project-top">
-        <div class="project-name">Agentic Career Orchestrator</div>
+    <!-- AGENTIC CAREER ORCHESTRATOR -->
+    <div class="case-study" style="padding-top:32px;">
+      <div class="case-study-header">
+        <div class="case-study-name">Agentic Career Orchestrator</div>
         <span class="project-badge badge-done">Completed</span>
       </div>
-      <div class="project-meta">Job search automation pipeline — Personal tooling</div>
-      <p class="project-desc">A values-aligned job search automation system that filters postings by geography, compensation, experience fit, and organisational values. Built in Python with LLM-powered matching logic, reducing manual search overhead while improving signal quality.</p>
-      <a href="https://github.com/ShawnMohrToronto/agentic-career-orchestrator" class="project-link" target="_blank">View on GitHub</a>
+      <div class="case-study-meta">Job search automation pipeline — Personal tooling · Python & LLM workflows</div>
+
+      <div class="cs-block">
+        <div class="cs-label">Overview</div>
+        <div class="cs-body">
+          <p>A values-aligned job search automation system that filters postings by geography, compensation, experience fit, and organisational values. Built in Python with LLM-powered matching logic, reducing manual search overhead while improving signal quality. Designed and built as a solo technical project to address a real operational problem — the cognitive overhead of managing a high-volume job search without sacrificing fit criteria.</p>
+        </div>
+      </div>
+
+      <div class="cs-block">
+        <div class="cs-label">Stack</div>
+        <div class="cs-stack">
+          <span class="cs-stack-tag">Python</span>
+          <span class="cs-stack-tag">LLM matching</span>
+          <span class="cs-stack-tag">Web scraping</span>
+        </div>
+      </div>
+
+      <a href="https://github.com/ShawnMohrToronto/agentic-career-orchestrator" class="case-study-link" target="_blank">View on GitHub</a>
     </div>
   </section>
 
@@ -555,13 +625,12 @@
   <div class="footer-right" id="contact">
     <span class="footer-copy">Shawn Mohr — Toronto, Ontario</span>
     <ul class="footer-links">
-      <li><a href="mailto:shawn@example.com">Email</a></li>
+      <li><a href="mailto:shawnmohr7@gmail.com">Email</a></li>
       <li><a href="https://www.linkedin.com/in/shawn-mohr-toronto/" target="_blank">LinkedIn</a></li>
       <li><a href="https://github.com/ShawnMohrToronto" target="_blank">GitHub</a></li>
     </ul>
   </div>
 
-</div><!-- end right-col -->
-
+</div>
 </body>
 </html>
