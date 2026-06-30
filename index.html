@@ -18,6 +18,7 @@
     --accent-dim: #F5E8E4;
     --col-left: 220px;
     --sans: 'Inter', -apple-system, sans-serif;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,8 +42,6 @@
     grid-column: 1;
     grid-row: 1 / -1;
     background: var(--ink);
-    display: flex;
-    flex-direction: column;
   }
 
   .left-col-inner {
@@ -71,9 +70,11 @@
     letter-spacing: 0.1em; text-transform: uppercase;
     color: #555552; display: block; padding: 4px 0;
     transition: color 0.15s;
+    cursor: pointer;
   }
 
   .side-nav a:hover { color: #F5F4EF; text-decoration: none; }
+  .side-nav a.active { color: var(--accent); }
 
   .left-bottom { display: flex; flex-direction: column; gap: 20px; }
 
@@ -84,7 +85,7 @@
   }
 
   .left-creds { display: flex; flex-direction: column; gap: 4px; }
-  .left-cred { font-size: 11px; color: #555552; letter-spacing: 0.01em; }
+  .left-cred { font-size: 11px; color: #555552; }
   .hero-location { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #3A3A38; }
 
   /* ── RIGHT COLUMN ── */
@@ -117,10 +118,23 @@
   .hero-bio {
     font-size: 17px; font-weight: 300;
     line-height: 1.75; color: var(--ink);
-    max-width: 520px; margin-bottom: 40px;
+    max-width: 520px; margin-bottom: 16px;
   }
 
   .hero-bio strong { font-weight: 600; }
+
+  .hero-hint {
+    font-size: 12px; color: var(--slate);
+    margin-bottom: 40px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .hero-hint::before {
+    content: '';
+    display: inline-block;
+    width: 20px; height: 1px;
+    background: var(--slate);
+  }
 
   .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
@@ -136,39 +150,83 @@
   .btn-ghost { border: 1px solid var(--rule); color: var(--ink); }
   .btn-ghost:hover { border-color: var(--slate); text-decoration: none; }
 
-  /* ── CONTENT SECTIONS ── */
-  .content-section {
-    padding: 64px 52px;
+  /* ── ACCORDION SECTIONS ── */
+  .accordion-section {
     border-bottom: 1px solid var(--rule);
   }
 
-  .content-section:last-child { border-bottom: none; }
-
-  .section-header {
-    display: flex; align-items: center;
-    gap: 16px; margin-bottom: 44px;
+  .accordion-trigger {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 52px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+    position: relative;
   }
 
-  .section-num {
+  .accordion-trigger:hover { background: rgba(0,0,0,0.02); }
+
+  .accordion-num {
     font-size: 11px; font-weight: 700;
     letter-spacing: 0.1em; color: var(--accent);
-    font-variant-numeric: tabular-nums; flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
   }
 
-  .section-title {
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--slate); flex-shrink: 0;
+  .accordion-title {
+    font-size: 15px; font-weight: 700;
+    letter-spacing: -0.01em; color: var(--ink);
+    flex: 1;
   }
 
-  .section-rule { flex: 1; height: 1px; background: var(--rule); }
-
-  /* ── CASE STUDY (LEAP) ── */
-  .case-study {
-    padding: 32px 0;
-    border-bottom: 1px solid var(--rule);
+  .accordion-meta {
+    font-size: 12px; color: var(--slate);
+    font-style: italic;
   }
 
+  .accordion-icon {
+    width: 24px; height: 24px;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s var(--ease);
+    color: var(--slate);
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .accordion-section.open .accordion-icon {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    transform: rotate(45deg);
+  }
+
+  .accordion-section.open .accordion-num {
+    color: var(--accent);
+  }
+
+  /* ── ACCORDION BODY ── */
+  .accordion-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.45s var(--ease);
+  }
+
+  .accordion-section.open .accordion-body {
+    max-height: 4000px;
+  }
+
+  .accordion-inner {
+    padding: 0 52px 52px;
+  }
+
+  /* ── CASE STUDY ── */
+  .case-study { padding: 32px 0; border-bottom: 1px solid var(--rule); }
   .case-study:last-child { border-bottom: none; padding-bottom: 0; }
 
   .case-study-header {
@@ -192,12 +250,8 @@
   .badge-done { background: #EAEAE6; color: #6B6B67; }
   .badge-pub { background: #E6F0E8; color: #2D6A35; }
 
-  .case-study-meta {
-    font-size: 12px; color: var(--slate);
-    margin-bottom: 28px; font-style: italic;
-  }
+  .case-study-meta { font-size: 12px; color: var(--slate); margin-bottom: 28px; font-style: italic; }
 
-  /* Case study sub-sections */
   .cs-block { margin-bottom: 28px; }
   .cs-block:last-child { margin-bottom: 0; }
 
@@ -207,32 +261,20 @@
     color: var(--accent); margin-bottom: 10px;
   }
 
-  .cs-body {
-    font-size: 14px; line-height: 1.85;
-    color: #333330; max-width: 600px;
-  }
-
+  .cs-body { font-size: 14px; line-height: 1.85; color: #333330; max-width: 600px; }
   .cs-body p { margin-bottom: 12px; }
   .cs-body p:last-child { margin-bottom: 0; }
 
-  /* Decision list */
   .cs-decisions { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
 
   .cs-decision {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 0 20px;
-    font-size: 14px; line-height: 1.7;
+    display: grid; grid-template-columns: 180px 1fr;
+    gap: 0 20px; font-size: 14px; line-height: 1.7;
   }
 
-  .cs-decision-label {
-    font-weight: 700; color: var(--ink);
-    font-size: 13px; padding-top: 1px;
-  }
-
+  .cs-decision-label { font-weight: 700; color: var(--ink); font-size: 13px; padding-top: 1px; }
   .cs-decision-body { color: #333330; }
 
-  /* Stats row */
   .cs-stats {
     display: flex; flex-wrap: wrap;
     gap: 1px; margin-top: 4px;
@@ -241,30 +283,16 @@
   }
 
   .cs-stat {
-    background: var(--warm-white);
-    padding: 14px 20px; flex: 1;
-    min-width: 140px;
+    background: var(--warm-white); padding: 14px 20px;
+    flex: 1; min-width: 140px;
     border-right: 1px solid var(--rule);
   }
 
   .cs-stat:last-child { border-right: none; }
+  .cs-stat-value { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 2px; }
+  .cs-stat-label { font-size: 11px; color: var(--slate); line-height: 1.4; }
 
-  .cs-stat-value {
-    font-size: 20px; font-weight: 800;
-    letter-spacing: -0.02em; color: var(--ink);
-    margin-bottom: 2px;
-  }
-
-  .cs-stat-label {
-    font-size: 11px; color: var(--slate);
-    line-height: 1.4;
-  }
-
-  /* Stack tags */
-  .cs-stack {
-    display: flex; flex-wrap: wrap;
-    gap: 6px; margin-top: 4px;
-  }
+  .cs-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 
   .cs-stack-tag {
     font-size: 11px; font-weight: 500;
@@ -284,11 +312,7 @@
   .case-study-link::after { content: ' →'; }
 
   /* ── STANDARD PROJECTS ── */
-  .project {
-    padding: 32px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-
+  .project { padding: 32px 0; border-bottom: 1px solid var(--rule); }
   .project:first-child { padding-top: 0; }
   .project:last-child { border-bottom: none; padding-bottom: 0; }
 
@@ -298,33 +322,22 @@
     gap: 16px; margin-bottom: 6px; flex-wrap: wrap;
   }
 
-  .project-name {
-    font-size: 22px; font-weight: 800;
-    letter-spacing: -0.02em; color: var(--ink);
-  }
-
+  .project-name { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
   .project-meta { font-size: 12px; color: var(--slate); margin-bottom: 14px; font-style: italic; }
-
-  .project-desc {
-    font-size: 14px; line-height: 1.8;
-    color: #333330; max-width: 580px;
-  }
+  .project-desc { font-size: 14px; line-height: 1.8; color: #333330; max-width: 580px; }
 
   .project-link {
     display: inline-block; margin-top: 14px;
     font-size: 12px; font-weight: 600;
-    letter-spacing: 0.04em; color: var(--accent);
-    text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--accent); text-transform: uppercase;
   }
 
   .project-link::after { content: ' →'; }
 
   /* ── EXPERIENCE ── */
   .exp {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 0 28px;
-    padding: 28px 0;
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 0 28px; padding: 28px 0;
     border-bottom: 1px solid var(--rule);
   }
 
@@ -342,12 +355,11 @@
     display: flex; align-items: center;
     justify-content: space-between;
     flex-wrap: wrap; gap: 16px;
+    border-top: 1px solid var(--rule);
   }
 
   .footer-copy { font-size: 12px; color: var(--slate); }
-
   .footer-links { display: flex; gap: 24px; list-style: none; }
-
   .footer-links a { font-size: 12px; color: var(--slate); font-weight: 500; }
   .footer-links a:hover { color: var(--ink); }
 
@@ -360,7 +372,8 @@
     .side-nav { flex-direction: row; gap: 16px; }
     .right-col { grid-column: 1; }
     .hero { min-height: auto; padding: 40px 24px; }
-    .content-section { padding: 44px 24px; }
+    .accordion-trigger { padding: 20px 24px; }
+    .accordion-inner { padding: 0 24px 40px; }
     .exp { grid-template-columns: 1fr; gap: 4px; }
     .cs-decision { grid-template-columns: 1fr; gap: 4px; }
     .footer-right { padding: 24px; }
@@ -375,9 +388,9 @@
     <div class="left-top">
       <div class="logo-mark" aria-hidden="true"></div>
       <ul class="side-nav">
-        <li><a href="#digital">Digital</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#creative">Creative</a></li>
+        <li><a onclick="openSection('digital')" href="#digital">Digital</a></li>
+        <li><a onclick="openSection('experience')" href="#experience">Experience</a></li>
+        <li><a onclick="openSection('creative')" href="#creative">Creative</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -409,6 +422,7 @@
     <p class="hero-bio">
       7+ years delivering complex initiatives across <strong>industrial IoT, luxury e-commerce, and e-learning</strong>. I architect systems, build delivery infrastructure, and operate at the intersection of technical depth and organizational clarity.
     </p>
+    <p class="hero-hint">Select a section below to explore</p>
     <div class="hero-actions">
       <a href="mailto:shawnmohr7@gmail.com" class="btn btn-primary">Get in touch</a>
       <a href="https://github.com/ShawnMohrToronto" class="btn btn-ghost" target="_blank">GitHub</a>
@@ -416,210 +430,225 @@
     </div>
   </section>
 
-  <!-- DIGITAL PROJECTS -->
-  <section class="content-section" id="digital">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <span class="section-title">Digital projects</span>
-      <div class="section-rule"></div>
+  <!-- ACCORDION: DIGITAL -->
+  <div class="accordion-section" id="digital">
+    <div class="accordion-trigger" onclick="toggleSection('digital')">
+      <span class="accordion-num">01</span>
+      <span class="accordion-title">Digital Projects</span>
+      <span class="accordion-meta">LEAP · Agentic Career Orchestrator</span>
+      <div class="accordion-icon">+</div>
     </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
 
-    <!-- LEAP CASE STUDY -->
-    <div class="case-study">
-      <div class="case-study-header">
-        <div class="case-study-name">LEAP</div>
-        <span class="project-badge badge-active">In development</span>
-      </div>
-      <div class="case-study-meta">B2B Lead Enrichment Agent Proxy — Solo founder build · Program management & technical execution</div>
-
-      <div class="cs-block">
-        <div class="cs-label">The problem</div>
-        <div class="cs-body">
-          <p>Revenue Operations teams at mid-market B2B firms share a structural problem: their CRMs are full of stale, incomplete company records. Lead data decays at roughly 30% per year. The standard response is manual research — SDRs spending hours filling in fields that should already be there — or expensive horizontal enrichment platforms that return generic, pre-scraped data that doesn't match the specific intelligence each firm actually needs.</p>
-          <p>ZoomInfo and Apollo offer broad coverage from static databases. Clay aggregates multiple vendors with LLM summaries, but uses generalised prompts to keep costs predictable — meaning every client gets the same surface-level output. Neither answers the question a RevOps director actually needs answered: <em>does this company match our specific ICP, based on what they actually do?</em></p>
-        </div>
-      </div>
-
-      <div class="cs-block">
-        <div class="cs-label">The approach</div>
-        <div class="cs-decisions">
-          <div class="cs-decision">
-            <div class="cs-decision-label">Invisible by design</div>
-            <div class="cs-decision-body">No new dashboard, no credits to manage, no behavior change required. LEAP executes inside the client's existing HubSpot workflow. The zero-click proof-of-value motion sends a prospect 30 of their own un-enriched leads, returned as a completed import sheet within two hours.</div>
+        <!-- LEAP -->
+        <div class="case-study">
+          <div class="case-study-header">
+            <div class="case-study-name">LEAP</div>
+            <span class="project-badge badge-active">In development</span>
           </div>
-          <div class="cs-decision">
-            <div class="cs-decision-label">Vertical precision</div>
-            <div class="cs-decision-body">Rather than matching a generic industry tag, LEAP parses unstructured text from company case studies and homepage copy to determine specific operational characteristics. The extraction schema is customised per client vertical — the capability Clay's cost model prevents them from offering.</div>
+          <div class="case-study-meta">B2B Lead Enrichment Agent Proxy — Solo founder build · Program management & technical execution</div>
+
+          <div class="cs-block">
+            <div class="cs-label">The problem</div>
+            <div class="cs-body">
+              <p>Revenue Operations teams at mid-market B2B firms share a structural problem: their CRMs are full of stale, incomplete company records. Lead data decays at roughly 30% per year. The standard response is manual research — SDRs spending hours filling in fields that should already be there — or expensive horizontal enrichment platforms that return generic, pre-scraped data that doesn't match the specific intelligence each firm actually needs.</p>
+              <p>ZoomInfo and Apollo offer broad coverage from static databases. Clay aggregates multiple vendors with LLM summaries, but uses generalised prompts to keep costs predictable — meaning every client gets the same surface-level output. Neither answers the question a RevOps director actually needs answered: <em>does this company match our specific ICP, based on what they actually do?</em></p>
+            </div>
           </div>
-          <div class="cs-decision">
-            <div class="cs-decision-label">Solo-operator economics</div>
-            <div class="cs-decision-body">The financial model was built before the first line of code. At $0.003 variable COGS per lead and a $199/month base subscription, the unit economics support a one-person operation from day one.</div>
+
+          <div class="cs-block">
+            <div class="cs-label">The approach</div>
+            <div class="cs-decisions">
+              <div class="cs-decision">
+                <div class="cs-decision-label">Invisible by design</div>
+                <div class="cs-decision-body">No new dashboard, no credits to manage, no behavior change required. LEAP executes inside the client's existing HubSpot workflow. The zero-click proof-of-value motion sends a prospect 30 of their own un-enriched leads, returned as a completed import sheet within two hours.</div>
+              </div>
+              <div class="cs-decision">
+                <div class="cs-decision-label">Vertical precision</div>
+                <div class="cs-decision-body">Rather than matching a generic industry tag, LEAP parses unstructured text from company case studies and homepage copy to determine specific operational characteristics. The extraction schema is customised per client vertical — the capability Clay's cost model prevents them from offering.</div>
+              </div>
+              <div class="cs-decision">
+                <div class="cs-decision-label">Solo-operator economics</div>
+                <div class="cs-decision-body">The financial model was built before the first line of code. At $0.003 variable COGS per lead and a $199/month base subscription, the unit economics support a one-person operation from day one.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-block">
+            <div class="cs-label">The numbers</div>
+            <div class="cs-stats">
+              <div class="cs-stat">
+                <div class="cs-stat-value">$0.003</div>
+                <div class="cs-stat-label">Variable COGS per lead</div>
+              </div>
+              <div class="cs-stat">
+                <div class="cs-stat-value">$321</div>
+                <div class="cs-stat-label">Contribution margin per account/month</div>
+              </div>
+              <div class="cs-stat">
+                <div class="cs-stat-value">43:1</div>
+                <div class="cs-stat-label">LTV:CAC ratio</div>
+              </div>
+              <div class="cs-stat">
+                <div class="cs-stat-value">6</div>
+                <div class="cs-stat-label">Accounts to break-even</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-block">
+            <div class="cs-label">Program management</div>
+            <div class="cs-body">
+              <p>LEAP was scoped as a formal program initiative before a line of code was written. A full project proposal established the competitive architecture, financial model, TAM/ICP definition, legal compliance framework, and quantitative validation methodology. A project charter followed, defining a 50-day critical path across four phases with an agent-augmented RACI matrix that delegates execution tasks to specialised LLM configurations while the founder retains strategic accountability.</p>
+              <p>Risk was identified and mitigated formally: scraper blocking routed through proxy nodes; GDPR/CASL exposure contained by restricting initial operations to North American domains; token budget bleed controlled by a programmatic pre-filter that bypasses LLM calls on low-signal pages.</p>
+            </div>
+          </div>
+
+          <div class="cs-block">
+            <div class="cs-label">Current status</div>
+            <div class="cs-body">
+              <p>Phase 1 in active development. Live FastAPI application with working <code style="font-size:13px;background:#EAEAE6;padding:1px 5px;border-radius:2px;">/healthz</code> and <code style="font-size:13px;background:#EAEAE6;padding:1px 5px;border-radius:2px;">/enrich</code> endpoints. Async webhook ingestion confirmed under 200ms. Target: 30-lead zero-click proof-of-value delivery at day 47.</p>
+            </div>
+          </div>
+
+          <div class="cs-block">
+            <div class="cs-label">Stack</div>
+            <div class="cs-stack">
+              <span class="cs-stack-tag">Python</span>
+              <span class="cs-stack-tag">FastAPI</span>
+              <span class="cs-stack-tag">Docker</span>
+              <span class="cs-stack-tag">Railway</span>
+              <span class="cs-stack-tag">Supabase</span>
+              <span class="cs-stack-tag">Jina AI</span>
+              <span class="cs-stack-tag">Firecrawl</span>
+              <span class="cs-stack-tag">gpt-4o-mini</span>
+            </div>
+          </div>
+
+          <a href="https://github.com/ShawnMohrToronto" class="case-study-link" target="_blank">View on GitHub</a>
+        </div>
+
+        <!-- CAREER ORCHESTRATOR -->
+        <div class="case-study" style="padding-top:32px;">
+          <div class="case-study-header">
+            <div class="case-study-name">Agentic Career Orchestrator</div>
+            <span class="project-badge badge-done">Completed</span>
+          </div>
+          <div class="case-study-meta">Job search automation pipeline — Personal tooling · Python & LLM workflows</div>
+          <div class="cs-block">
+            <div class="cs-label">Overview</div>
+            <div class="cs-body">
+              <p>A values-aligned job search automation system that filters postings by geography, compensation, experience fit, and organisational values. Built in Python with LLM-powered matching logic, reducing manual search overhead while improving signal quality. Designed and built as a solo technical project to address a real operational problem — the cognitive overhead of managing a high-volume job search without sacrificing fit criteria.</p>
+            </div>
+          </div>
+          <div class="cs-block">
+            <div class="cs-label">Stack</div>
+            <div class="cs-stack">
+              <span class="cs-stack-tag">Python</span>
+              <span class="cs-stack-tag">LLM matching</span>
+              <span class="cs-stack-tag">Web scraping</span>
+            </div>
+          </div>
+          <a href="https://github.com/ShawnMohrToronto/agentic-career-orchestrator" class="case-study-link" target="_blank">View on GitHub</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCORDION: EXPERIENCE -->
+  <div class="accordion-section" id="experience">
+    <div class="accordion-trigger" onclick="toggleSection('experience')">
+      <span class="accordion-num">02</span>
+      <span class="accordion-title">Experience</span>
+      <span class="accordion-meta">Sephora · Symboticware · Sonic E-Learning</span>
+      <div class="accordion-icon">+</div>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+
+        <div class="exp">
+          <div class="exp-period">2024 –<br>2025</div>
+          <div>
+            <div class="exp-role">Manager, Distribution Projects</div>
+            <div class="exp-org">Sephora Canada</div>
+            <div class="exp-detail">Led the technical and operational stream for a major distribution facility relocation and TMS implementation, maintaining 100% e-commerce operational continuity throughout. Validated $100K+ in operational savings through Agile governance. Delivered measurable CSAT and CES improvements through a new 3PL Client Care system.</div>
           </div>
         </div>
-      </div>
 
-      <div class="cs-block">
-        <div class="cs-label">The numbers</div>
-        <div class="cs-stats">
-          <div class="cs-stat">
-            <div class="cs-stat-value">$0.003</div>
-            <div class="cs-stat-label">Variable COGS per lead</div>
-          </div>
-          <div class="cs-stat">
-            <div class="cs-stat-value">$321</div>
-            <div class="cs-stat-label">Contribution margin per account/month</div>
-          </div>
-          <div class="cs-stat">
-            <div class="cs-stat-value">43:1</div>
-            <div class="cs-stat-label">LTV:CAC ratio</div>
-          </div>
-          <div class="cs-stat">
-            <div class="cs-stat-value">6</div>
-            <div class="cs-stat-label">Accounts to break-even</div>
+        <div class="exp">
+          <div class="exp-period">2021 –<br>2023</div>
+          <div>
+            <div class="exp-role">Sr. Director, Operations & Customer Success</div>
+            <div class="exp-org">Symboticware</div>
+            <div class="exp-detail">Owned end-to-end delivery of a $5M enterprise IoT deployment in an active 5G-enabled mining environment. Served as primary client interface at Director/VP level. Built NPS and VoC infrastructure from zero, transformed ad-hoc workflows into repeatable delivery frameworks enabling 2X team scaling without additional headcount.</div>
           </div>
         </div>
-      </div>
 
-      <div class="cs-block">
-        <div class="cs-label">Program management</div>
-        <div class="cs-body">
-          <p>LEAP was scoped as a formal program initiative before a line of code was written. A full project proposal established the competitive architecture, financial model, TAM/ICP definition, legal compliance framework, and quantitative validation methodology. A project charter followed, defining a 50-day critical path across four phases with an agent-augmented RACI matrix that delegates execution tasks to specialised LLM configurations while the founder retains strategic accountability.</p>
-          <p>Risk was identified and mitigated formally: scraper blocking routed through proxy nodes; GDPR/CASL exposure contained by restricting initial operations to North American domains; token budget bleed controlled by a programmatic pre-filter that bypasses LLM calls on low-signal pages.</p>
+        <div class="exp">
+          <div class="exp-period">2018 –<br>2021</div>
+          <div>
+            <div class="exp-role">Project Manager</div>
+            <div class="exp-org">Sonic E-Learning</div>
+            <div class="exp-detail">Established the organisation's first formal PM and Agile governance structure. Built Power BI dashboards proving that higher training compliance reduced client collision costs — providing the data foundation supporting $4M+ in ARR growth.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-block">
-        <div class="cs-label">Current status</div>
-        <div class="cs-body">
-          <p>Phase 1 in active development. Live FastAPI application with working <code style="font-size:13px;background:#EAEAE6;padding:1px 5px;border-radius:2px;">/healthz</code> and <code style="font-size:13px;background:#EAEAE6;padding:1px 5px;border-radius:2px;">/enrich</code> endpoints. Async webhook ingestion confirmed under 200ms. Project scaffold, dependency stack, and environment management committed to GitHub. Target: 30-lead zero-click proof-of-value delivery at day 47.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCORDION: CREATIVE -->
+  <div class="accordion-section" id="creative">
+    <div class="accordion-trigger" onclick="toggleSection('creative')">
+      <span class="accordion-num">03</span>
+      <span class="accordion-title">Creative Work</span>
+      <span class="accordion-meta">Tabletop RPG design · Narrative systems</span>
+      <div class="accordion-icon">+</div>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">Havocball Run</div>
+            <span class="project-badge badge-pub">Published</span>
+          </div>
+          <div class="project-meta">Tabletop RPG Design — Havoc Engine adaptation</div>
+          <p class="project-desc">A Cannonball Run-themed one-shot TTRPG built on a custom dice pool system. Players race across a ten-location branching map, managing a shared GAS resource, neutralising escalating THREATS, and racing to clear OBJECTIVES before rival teams do. Runs in both cooperative and competitive modes — four rule changes convert the entire experience between them. Designed for and run at the Toronto D&amp;D Club.</p>
         </div>
-      </div>
 
-      <div class="cs-block">
-        <div class="cs-label">Stack</div>
-        <div class="cs-stack">
-          <span class="cs-stack-tag">Python</span>
-          <span class="cs-stack-tag">FastAPI</span>
-          <span class="cs-stack-tag">Docker</span>
-          <span class="cs-stack-tag">Railway</span>
-          <span class="cs-stack-tag">Supabase</span>
-          <span class="cs-stack-tag">Jina AI</span>
-          <span class="cs-stack-tag">Firecrawl</span>
-          <span class="cs-stack-tag">gpt-4o-mini</span>
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">Home Alone: Family Christmas</div>
+            <span class="project-badge badge-pub">Published</span>
+          </div>
+          <div class="project-meta">Tabletop RPG Design — Never Stop Blowing Up system</div>
+          <p class="project-desc">A family-friendly Home Alone-inspired one-shot in which players must prepare a snowbound estate for Christmas while fending off a pair of hapless burglars. Features a modular trap-building system with four trap categories, a branching encounter structure, and a full estate room guide. Designed to onboard new players through embedded rules and gentle prompts.</p>
         </div>
-      </div>
 
-      <a href="https://github.com/ShawnMohrToronto" class="case-study-link" target="_blank">View on GitHub</a>
-    </div>
-
-    <!-- AGENTIC CAREER ORCHESTRATOR -->
-    <div class="case-study" style="padding-top:32px;">
-      <div class="case-study-header">
-        <div class="case-study-name">Agentic Career Orchestrator</div>
-        <span class="project-badge badge-done">Completed</span>
-      </div>
-      <div class="case-study-meta">Job search automation pipeline — Personal tooling · Python & LLM workflows</div>
-
-      <div class="cs-block">
-        <div class="cs-label">Overview</div>
-        <div class="cs-body">
-          <p>A values-aligned job search automation system that filters postings by geography, compensation, experience fit, and organisational values. Built in Python with LLM-powered matching logic, reducing manual search overhead while improving signal quality. Designed and built as a solo technical project to address a real operational problem — the cognitive overhead of managing a high-volume job search without sacrificing fit criteria.</p>
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">Epic Trucker in Danger City</div>
+            <span class="project-badge badge-pub">Published</span>
+          </div>
+          <div class="project-meta">Tabletop RPG Design — Never Stop Blowing Up system</div>
+          <p class="project-desc">A satirical pulp action one-shot set in the Regular Show universe. Players stop the Shadow Lotus Clan from seizing a mythic big rig truck across three acts of escalating stakes, branching social and combat resolution, and a prophecy-bound NPC whose arrival is gated behind player failure. An exercise in escalation design and comedic mythmaking.</p>
         </div>
-      </div>
 
-      <div class="cs-block">
-        <div class="cs-label">Stack</div>
-        <div class="cs-stack">
-          <span class="cs-stack-tag">Python</span>
-          <span class="cs-stack-tag">LLM matching</span>
-          <span class="cs-stack-tag">Web scraping</span>
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">Sidekick Quest</div>
+            <span class="project-badge badge-pub">Published</span>
+          </div>
+          <div class="project-meta">Tabletop RPG Design — Never Stop Blowing Up system</div>
+          <p class="project-desc">A pulp adventure one-shot in which players are the sidekicks to legendary archaeologist Montana Smith. A trap-laden temple slide, locked chambers, and animated Gorilla Guards reward creative stat application and collaborative problem-solving. Built to demonstrate how a familiar genre becomes structurally interesting through consequence-driven encounter design.</p>
         </div>
-      </div>
 
-      <a href="https://github.com/ShawnMohrToronto/agentic-career-orchestrator" class="case-study-link" target="_blank">View on GitHub</a>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section class="content-section" id="experience">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <span class="section-title">Experience</span>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="exp">
-      <div class="exp-period">2022 –<br>Present</div>
-      <div>
-        <div class="exp-role">Manager, Distribution Projects</div>
-        <div class="exp-org">Sephora Canada</div>
-        <div class="exp-detail">Led cross-functional distribution and operations projects across a national retail network. Managed vendor relationships, delivery timelines, and infrastructure improvements at scale.</div>
       </div>
     </div>
-
-    <div class="exp">
-      <div class="exp-period">2018 –<br>2022</div>
-      <div>
-        <div class="exp-role">Sr. Director, Operations & Customer Success</div>
-        <div class="exp-org">Symboticware</div>
-        <div class="exp-detail">Directed operations and customer success for an industrial IoT platform. Built delivery frameworks, managed enterprise client relationships, and scaled internal systems through significant product growth.</div>
-      </div>
-    </div>
-
-    <div class="exp">
-      <div class="exp-period">2015 –<br>2018</div>
-      <div>
-        <div class="exp-role">Project Manager</div>
-        <div class="exp-org">Sonic E-Learning</div>
-        <div class="exp-detail">Managed end-to-end delivery of custom e-learning projects for enterprise clients. Coordinated cross-functional teams across instructional design, development, and client stakeholders.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CREATIVE PROJECTS -->
-  <section class="content-section" id="creative">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <span class="section-title">Creative work</span>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="project">
-      <div class="project-top">
-        <div class="project-name">Havocball Run</div>
-        <span class="project-badge badge-pub">Published</span>
-      </div>
-      <div class="project-meta">Tabletop RPG Design — Havoc Engine adaptation</div>
-      <p class="project-desc">A Cannonball Run-themed one-shot TTRPG built on a custom dice pool system. Players race across a ten-location branching map, managing a shared GAS resource, neutralising escalating THREATS, and racing to clear OBJECTIVES before rival teams do. Runs in both cooperative and competitive modes — four rule changes convert the entire experience between them. Designed for and run at the Toronto D&amp;D Club.</p>
-    </div>
-
-    <div class="project">
-      <div class="project-top">
-        <div class="project-name">Home Alone: Family Christmas</div>
-        <span class="project-badge badge-pub">Published</span>
-      </div>
-      <div class="project-meta">Tabletop RPG Design — Never Stop Blowing Up system</div>
-      <p class="project-desc">A family-friendly Home Alone-inspired one-shot in which players must prepare a snowbound estate for Christmas while fending off a pair of hapless burglars. Features a modular trap-building system with four trap categories, a branching encounter structure, and a full estate room guide. Designed to onboard new players through embedded rules and gentle prompts.</p>
-    </div>
-
-    <div class="project">
-      <div class="project-top">
-        <div class="project-name">Epic Trucker in Danger City</div>
-        <span class="project-badge badge-pub">Published</span>
-      </div>
-      <div class="project-meta">Tabletop RPG Design — Never Stop Blowing Up system</div>
-      <p class="project-desc">A satirical pulp action one-shot set in the Regular Show universe. Players stop the Shadow Lotus Clan from seizing a mythic big rig truck across three acts of escalating stakes, branching social and combat resolution, and a prophecy-bound NPC whose arrival is gated behind player failure. An exercise in escalation design and comedic mythmaking.</p>
-    </div>
-
-    <div class="project">
-      <div class="project-top">
-        <div class="project-name">Sidekick Quest</div>
-        <span class="project-badge badge-pub">Published</span>
-      </div>
-      <div class="project-meta">Tabletop RPG Design — Never Stop Blowing Up system</div>
-      <p class="project-desc">A pulp adventure one-shot in which players are the sidekicks to legendary archaeologist Montana Smith. A trap-laden temple slide, locked chambers, and animated Gorilla Guards reward creative stat application and collaborative problem-solving. Built to demonstrate how a familiar genre becomes structurally interesting through consequence-driven encounter design.</p>
-    </div>
-  </section>
+  </div>
 
   <!-- FOOTER -->
   <div class="footer-right" id="contact">
@@ -632,5 +661,39 @@
   </div>
 
 </div>
+
+<script>
+  function toggleSection(id) {
+    const sections = document.querySelectorAll('.accordion-section');
+    sections.forEach(s => {
+      if (s.id === id) {
+        s.classList.toggle('open');
+      } else {
+        s.classList.remove('open');
+      }
+    });
+    // Update nav active state
+    updateNav(id);
+  }
+
+  function openSection(id) {
+    const sections = document.querySelectorAll('.accordion-section');
+    sections.forEach(s => {
+      if (s.id === id) {
+        s.classList.add('open');
+      } else {
+        s.classList.remove('open');
+      }
+    });
+    updateNav(id);
+  }
+
+  function updateNav(id) {
+    document.querySelectorAll('.side-nav a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+</script>
+
 </body>
 </html>
