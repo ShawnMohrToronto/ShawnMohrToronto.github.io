@@ -346,8 +346,42 @@
 
   .exp-period { font-size: 11px; color: var(--slate); font-variant-numeric: tabular-nums; padding-top: 3px; line-height: 1.6; }
   .exp-role { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 2px; }
-  .exp-org { font-size: 13px; color: var(--accent); margin-bottom: 10px; font-weight: 500; }
-  .exp-detail { font-size: 13px; line-height: 1.75; color: #333330; }
+  .exp-org { font-size: 13px; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+
+  .exp-sub-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--slate); margin: 16px 0 8px;
+  }
+
+  .exp-sub-label:first-of-type { margin-top: 0; }
+
+  .exp-list { display: flex; flex-direction: column; gap: 6px; }
+
+  .exp-role-para {
+    font-size: 13px; line-height: 1.8;
+    color: #333330; max-width: 580px;
+  }
+
+  .exp-item {
+    font-size: 13px; line-height: 1.7;
+    color: #333330;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .exp-list.results .exp-item::before {
+    background: var(--accent);
+  }
 
   /* ── FOOTER ── */
   .footer-right {
@@ -572,8 +606,17 @@
           <div class="exp-period">2024 –<br>2025</div>
           <div>
             <div class="exp-role">Manager, Distribution Projects</div>
-            <div class="exp-org">Sephora Canada</div>
-            <div class="exp-detail">Led the technical and operational stream for a major distribution facility relocation and TMS implementation, maintaining 100% e-commerce operational continuity throughout. Validated $100K+ in operational savings through Agile governance. Delivered measurable CSAT and CES improvements through a new 3PL Client Care system.</div>
+            <div class="exp-org">Sephora Canada · Toronto, ON</div>
+
+            <div class="exp-sub-label">Role</div>
+            <p class="exp-role-para">A delivery leadership role at the center of a major distribution network transformation — owning the technical and operational stream of a full facility relocation while keeping a national e-commerce channel running without interruption. The position sits at the intersection of vendor management, systems integration, and frontline risk: negotiating with 3PL and technology partners, governing parallel workstreams under Agile discipline, and carrying accountability for staff safety through every phase of a live operational transition.</p>
+
+            <div class="exp-sub-label">Key Accomplishments</div>
+            <div class="exp-list results">
+              <div class="exp-item">Maintained 100% operational continuity for B2C e-commerce channels throughout the facility relocation.</div>
+              <div class="exp-item">Validated $100K+ in operational savings through rigorous Agile process governance and control.</div>
+              <div class="exp-item">Successfully delivered the TMS implementation on schedule alongside a new 3PL Client Care system for dotCa returns and refunds, establishing a scalable transportation and customer service operations foundation for the distribution network.</div>
+            </div>
           </div>
         </div>
 
@@ -581,8 +624,17 @@
           <div class="exp-period">2021 –<br>2023</div>
           <div>
             <div class="exp-role">Sr. Director, Operations & Customer Success</div>
-            <div class="exp-org">SYMX.AI (formerly Symboticware)</div>
-            <div class="exp-detail">Owned end-to-end delivery of a $5M enterprise IoT deployment in an active 5G-enabled mining environment. Served as primary client interface at Director/VP level. Built NPS and VoC infrastructure from zero, transformed ad-hoc workflows into repeatable delivery frameworks enabling 2X team scaling without additional headcount.</div>
+            <div class="exp-org">SYMX.AI (formerly Symboticware) · Toronto, ON · Industrial / IoT Sector</div>
+
+            <div class="exp-sub-label">Role</div>
+            <p class="exp-role-para">A senior operations and customer success mandate covering some of the most demanding deployment environments in industrial IoT — mining, forestry, and agriculture sites where uptime and trust are non-negotiable. The role carries full P&L-adjacent accountability for client success: the single point of contact at Director and VP level, responsible for steering committees, executive reporting, and the financial discipline behind every engagement. It requires building functions that don't yet exist — standing up Voice of Customer infrastructure from zero — and turning client signal into product, data, and go-to-market action.</p>
+
+            <div class="exp-sub-label">Key Accomplishments</div>
+            <div class="exp-list results">
+              <div class="exp-item">Successfully deployed a $5M SaaS/IoT solution in a high-complexity industrial environment with zero operational downtime.</div>
+              <div class="exp-item">Transformed ad-hoc workflows into repeatable engagement playbooks and operating rhythms, enabling 2X scaling of team capacity.</div>
+              <div class="exp-item">Rebuilt client data visualisations and acquired targeted data engineering expertise following NPS analysis, directly recovering at-risk client relationships.</div>
+            </div>
           </div>
         </div>
 
@@ -590,8 +642,17 @@
           <div class="exp-period">2018 –<br>2021</div>
           <div>
             <div class="exp-role">Project Manager</div>
-            <div class="exp-org">Sonic E-Learning</div>
-            <div class="exp-detail">Established the organisation's first formal PM and Agile governance structure. Built Power BI dashboards proving that higher training compliance reduced client collision costs — providing the data foundation supporting $4M+ in ARR growth.</div>
+            <div class="exp-org">Sonic E-Learning · Toronto, ON</div>
+
+            <div class="exp-sub-label">Role</div>
+            <p class="exp-role-para">An end-to-end delivery role for custom enterprise e-learning programs, owning the full client relationship from scoping through final sign-off. The position demanded constant prioritisation across a live portfolio of concurrent engagements — balancing client expectations, resource constraints, and timelines without a formal playbook to lean on. Success depended on driving program compliance and proving measurable value back to clients whose business outcomes hinged on training adoption.</p>
+
+            <div class="exp-sub-label">Key Accomplishments</div>
+            <div class="exp-list results">
+              <div class="exp-item">Established global data hygiene standards for enterprise client rosters — working with Nigerian Breweries (Heineken) to implement minimum viable formatting requirements for contract driver records, enabling accurate compliance tracking across a high-turnover workforce.</div>
+              <div class="exp-item">Built the organisation's first Power BI dashboards from scratch, integrating client training compliance data and collision statistics into a single reporting framework.</div>
+              <div class="exp-item">Established a data-driven client feedback loop — proving that higher training compliance directly reduced collision costs — creating the evidence base that supported $4M+ in ARR growth.</div>
+            </div>
           </div>
         </div>
 
